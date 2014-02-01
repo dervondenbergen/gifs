@@ -1,0 +1,25 @@
+{
+  "name": "gifs",
+  "version": "0.0.1",
+  "description": "Create a site for a list of curated gifs by you.",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "gifs",
+    "list"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dervondenbergen/gifs.git"
+  },
+  "author": "Felix De Montis <felix@demont.is> (http://demont.is)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "~3.4.8",
+    "jade": "~1.1.5"
+  }
+}
