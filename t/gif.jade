@@ -24,7 +24,8 @@ html
       var body = document.querySelector('body');
 
       if (window.addEventListener) {
-        body.addEventListener('click', reload, false)
+        body.addEventListener('click', reload);
+        body.addEventListener('touchend', reload);
       } else if (window.attachEvent) {
         body.attachEvent('onclick', reload);
       } else {

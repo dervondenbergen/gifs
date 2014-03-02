@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title all gifs
+    style.
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+      }
+  body
+    h1 All gifs
+    ul
+      each gif in gifs
+        li: a(href="/#{gif}")= gif
