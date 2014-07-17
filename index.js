@@ -1,20 +1,21 @@
 var express = require('express')
-  , http = require('http')
+  , request = require('request')
   , path = require('path')
   , fs = require('fs');
 
-function Shuffle(o) {
-  for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
-}
-
 var app = express();
+
+//var pw = 'w0wmuchstr0ngs0secure';
+
+var pw = '123';
 
 // all environments
 app.set('port', 1337);
 app.set('views', __dirname + '/t');
 app.set('view engine', 'jade');
+app.use(express.compress());
 app.use(express.methodOverride());
+app.use(express.bodyParser());
 app.use(app.router);
 app.use('/', express.static(path.join(__dirname, 'gifs')));
 
@@ -28,7 +29,7 @@ app.get('/', function (req,res) {
     }
 
     if (files.length) {
-      Shuffle(files);
+      var file = Math.floor(Math.random() * files.length);
       res.render('gif', { gif: files[0] });
     } else {
       res.send(404,'there are no gifs :(');
@@ -57,6 +58,50 @@ app.get('/list', function (req,res) {
 
 });
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+app.get('/upload', function (req, res) {
+  
+  res.render('upload');
+  
 });
+
+app.post('/upload', function(req, res) {
+  
+  var name = req.body.name
+    , url = req.body.url
+    , password = req.body.password;
+  
+  if (password == pw) {
+    
+    if (name && url) {
+    
+      var r = request(url);
+      
+      r.on('response', function (resp) {
+        
+        if (resp.statusCode == 200) {
+          
+          r.pipe(fs.createWriteStream( path.join(__dirname, 'gifs', name + '.gif') ));
+          res.render('upload', { message: 'upload successful', type: 'success' } );
+          
+        } else {
+          
+          res.render('upload', { message: 'error while getting image', type: 'error' } );
+          
+        }
+      
+      })
+      
+    } else {
+      
+      res.render('upload', { message: 'name and url has to be provided', type: 'error' } );
+      
+    }
+    
+  } else {
+    res.render('upload', { message: 'password not right', type: 'error' } );
+  }
+  
+});
+
+app.listen(app.get('port'));
+console.log('Express server listening on port ' + app.get('port'));

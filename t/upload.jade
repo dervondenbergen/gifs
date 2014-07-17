@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    title all gifs
+    meta(name="viewport" content="initial-scale=1.0,maximum-scale=1,width=device-width,minimal-ui")
+    style.
+      * {
+        width: 100%;
+        box-sizing: border-box;
+        padding: .4em;
+        text-align: center;
+      }
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        margin: 0;
+      }
+      input {
+        height: 3em;
+        font-size: 1.5em;
+        text-align: left;
+        -webkit-appearance: none;
+        background: #f5f5f5;
+        margin-bottom: .7em;
+      }
+      .success {
+        color: green;
+      }
+      .error {
+        color: red;
+      }
+  body
+    h1 Upload
+    form(method="POST" action="/upload")
+    
+      input(type="text" autocapitalize="off" autocorrect="off" required="required" name="name" placeholder="Name")
+      
+      input(type="url" autocapitalize="off" autocorrect="off" required="required" name="url" placeholder="Url")
+      
+      input(type="password" autocapitalize="off" autocorrect="off" required="required" name="password" pattern="[0-9]*" placeholder="Password")
+        
+      input(type="submit" value="Upload" style="text-align: center;")
+      
+    if message
+      span(class="#{type}") #{message}
