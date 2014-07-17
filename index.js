@@ -30,7 +30,7 @@ app.get('/', function (req,res) {
 
     if (files.length) {
       var file = Math.floor(Math.random() * files.length);
-      res.render('gif', { gif: files[0] });
+      res.render('gif', { gif: files[file] });
     } else {
       res.send(404,'there are no gifs :(');
     }
