@@ -58,6 +58,25 @@ app.get('/list', function (req,res) {
 
 });
 
+app.get('/gallery', function (req,res) {
+
+  fs.readdir(path.join(__dirname, 'gifs'), function (err,files) {
+
+    if (err) {
+      res.send(500,'there was an error on the server :(');
+      return;
+    }
+
+    if (files.length) {
+      res.render('gallery', { gifs: files });
+    } else {
+      res.send(404,'there are no gifs :(');
+    }
+
+  });
+
+});
+
 app.get('/upload', function (req, res) {
   
   res.render('upload');

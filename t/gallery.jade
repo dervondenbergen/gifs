@@ -1,0 +1,73 @@
+doctype html
+html
+  head
+    title all gifs
+    meta(name="viewport" content="initial-scale=1.0,maximum-scale=1,width=device-width")
+    style.
+      html {
+        font-family: Helvetica, Arial, sans-serif;
+        background: black;
+      }
+      body {
+        margin: 0;
+        width: 100%;
+      }
+      ul {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+      }
+      li {
+        display: block;
+        float: left;
+        width: 100%;
+      }
+      div {
+        height: 75vw;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+      
+      @media (min-width: 40em) {
+        
+        li {
+          width: 50%;
+        }
+        
+        div {
+          height: 37.5vw;
+        }
+        
+      }
+      
+      @media (min-width: 60em) {
+        
+        li {
+          width: calc(100% / 3);
+        }
+        
+        div {
+          height: 25vw;
+        }
+        
+      }
+      
+      @media (min-width: 80em) {
+        
+        li {
+          width: 25%;
+        }
+        
+        div {
+          height: 18.75vw;
+        }
+        
+      }
+      
+  body
+    ul
+      each gif in gifs
+        li
+          a(href="/#{gif}")
+            div(style="background-image:url('/#{gif}')")
