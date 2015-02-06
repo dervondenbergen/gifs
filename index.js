@@ -3,21 +3,21 @@ var express = require('express')
   , path = require('path')
   , fs = require('fs');
 
+var config = require('./config');
+
 var app = express();
 
-//var pw = 'w0wmuchstr0ngs0secure';
-
-var pw = '123';
+var pw = config.password;
 
 // all environments
-app.set('port', 1337);
+app.set('port', config.port);
 app.set('views', __dirname + '/t');
 app.set('view engine', 'jade');
 app.use(express.compress());
 app.use(express.methodOverride());
 app.use(express.bodyParser());
 app.use(app.router);
-app.use('/', express.static(path.join(__dirname, 'gifs')));
+app.use('/', express.static(path.join(__dirname, config.gifsFolder)));
 
 app.get('/', function (req,res) {
 
