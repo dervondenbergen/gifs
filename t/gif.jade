@@ -14,8 +14,23 @@ html
         background-size: contain;
         cursor: pointer;
         background-image: url('/#{gif}');
+        display: table;
+      }
+      input {
+        margin-left: -10000em;
+      }
+      code {
+        color: whitesmoke;
+        font-size: 3em;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        background: rgba(0, 0, 0, .5);
+        transition: opacity .3s;
       }
   body
+    input
+    code ctrl/cmd + c
     script.
       function reload () {
         window.location = window.location
@@ -30,4 +45,24 @@ html
         body.attachEvent('onclick', reload);
       } else {
         body.onclick = reload;
+      }
+
+      var input = 
+      document.querySelector('input');
+
+      input.value = window.location.href + '#{gif}';
+
+      setInterval(function(){
+        input.select();
+      }, 1000);
+
+      var code = document.querySelector('code');
+
+      if (window.sessionStorage.helpshown != '0') {
+        window.sessionStorage.helpshown = '0';
+        setTimeout(function(){
+          code.style.opacity = '0';
+        }, 2000);
+      } else {
+        code.style.display = 'none';
       }
