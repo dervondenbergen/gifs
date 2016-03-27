@@ -30,7 +30,11 @@ app.get('/', function (req,res) {
 
     if (files.length) {
       var file = Math.floor(Math.random() * files.length);
-      res.render('gif', { gif: files[file] });
+      if (req.query.hasOwnProperty('file')) {
+        res.sendfile(path.join(__dirname, 'gifs', files[file]));
+      } else {
+        res.render('gif', { gif: files[file] });
+      }
     } else {
       res.send(404,'there are no gifs :(');
     }
